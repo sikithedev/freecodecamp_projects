@@ -48,7 +48,10 @@ SET default_table_access_method = heap;
 --
 
 CREATE TABLE public.games (
-    game_id integer NOT NULL
+    game_id integer NOT NULL,
+    player_id integer,
+    secret_number integer,
+    number_of_guesses integer
 );
 
 
@@ -134,6 +137,8 @@ ALTER TABLE ONLY public.players ALTER COLUMN player_id SET DEFAULT nextval('publ
 -- Data for Name: players; Type: TABLE DATA; Schema: public; Owner: freecodecamp
 --
 
+INSERT INTO public.players VALUES (1, '');
+INSERT INTO public.players VALUES (2, 'Fabio');
 
 
 --
@@ -147,7 +152,7 @@ SELECT pg_catalog.setval('public.games_game_id_seq', 1, false);
 -- Name: players_player_id_seq; Type: SEQUENCE SET; Schema: public; Owner: freecodecamp
 --
 
-SELECT pg_catalog.setval('public.players_player_id_seq', 1, false);
+SELECT pg_catalog.setval('public.players_player_id_seq', 2, true);
 
 
 --
@@ -164,6 +169,14 @@ ALTER TABLE ONLY public.games
 
 ALTER TABLE ONLY public.players
     ADD CONSTRAINT players_pkey PRIMARY KEY (player_id);
+
+
+--
+-- Name: games games_player_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.games
+    ADD CONSTRAINT games_player_id_fkey FOREIGN KEY (player_id) REFERENCES public.players(player_id);
 
 
 --
