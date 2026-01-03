@@ -12,6 +12,11 @@
     "express": "^4.16.4",
     "multer": "2.0.2"
   },
+  "pnpm": {
+    "overrides": {
+      "qs": ">=6.14.1"
+    }
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/freeCodeCamp/boilerplate-project-filemetadata"
