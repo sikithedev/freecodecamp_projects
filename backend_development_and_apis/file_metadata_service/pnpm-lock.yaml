@@ -15,11 +15,14 @@ importers:
         specifier: ^8.2.0
         version: 8.6.0
       express:
-        specifier: ^4.16.4
+        specifier: ^4.21.2
         version: 4.21.2
       multer:
         specifier: 2.0.2
         version: 2.0.2
+      qs:
+        specifier: ^6.14.1
+        version: 6.14.1
 
 packages:
 
@@ -261,6 +264,10 @@ packages:
 
   qs@6.13.0:
     resolution: {integrity: sha512-+38qI9SOr8tfZ4QmJNplMUxqjbe7LKvvZgWdExBOmd+egZTtjLB67Gu0HRX3u/XOq7UU2Nx6nsjvS16Z9uwfpg==}
+    engines: {node: '>=0.6'}
+
+  qs@6.14.1:
+    resolution: {integrity: sha512-4EK3+xJl8Ts67nLYNwqw/dsFVnCf+qR7RgXSK9jEEm9unao3njwMDdmsdvoKBKHzxd7tCYz5e5M+SnMjdtXGQQ==}
     engines: {node: '>=0.6'}
 
   range-parser@1.2.1:
@@ -603,6 +610,10 @@ snapshots:
       ipaddr.js: 1.9.1
 
   qs@6.13.0:
+    dependencies:
+      side-channel: 1.1.0
+
+  qs@6.14.1:
     dependencies:
       side-channel: 1.1.0
 
