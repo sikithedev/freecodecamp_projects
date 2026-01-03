@@ -1,8 +1,35 @@
 const express = require("express");
 const multer = require("multer");
-const upload = multer({ dest: "uploads/" });
+const path = require("path");
+const crypto = require("crypto");
 const cors = require("cors");
 require("dotenv").config();
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "uploads/");
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = crypto.randomBytes(16).toString("hex");
+    const sanitizedOriginalName = path.basename(file.originalname);
+    cb(null, uniqueSuffix + "-" + sanitizedOriginalName);
+  },
+});
+
+const upload = multer({
+  storage: storage,
+  limits: {
+    fileSize: 10 * 1024 * 1024,
+    files: 1,
+  },
+  fileFilter: function (req, file, cb) {
+    const sanitizedName = path.basename(file.originalname);
+    if (sanitizedName !== file.originalname) {
+      return cb(new Error("Invalid file path"));
+    }
+    cb(null, true);
+  },
+});
 
 const app = express();
 

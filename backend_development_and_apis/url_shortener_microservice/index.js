@@ -67,7 +67,15 @@ app.get("/api/shorturl/:short_url", function (req, res) {
     if (err) throw err;
 
     if (data) {
-      res.redirect(data.original_url);
+      try {
+        const urlToRedirect = new URL(data.original_url);
+        if (!/^https?:$/.test(urlToRedirect.protocol)) {
+          return res.json({ error: "Invalid URL protocol" });
+        }
+        res.redirect(data.original_url);
+      } catch (err) {
+        res.json({ error: "Invalid URL" });
+      }
     } else {
       res.json({
         error: "No short URL found for the given input",
